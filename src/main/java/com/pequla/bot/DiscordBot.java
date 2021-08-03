@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -22,7 +23,8 @@ public class DiscordBot implements DisposableBean {
 
     public DiscordBot() throws LoginException, IOException {
         logger.info("Reading the token");
-        String token = Files.readString(Paths.get("token.txt"));
+        String token = Files.readString(Paths.get("token.txt"), StandardCharsets.UTF_8)
+                .replaceAll("\n", "");
         logger.info("Connecting to Discord API");
         this.jda = JDABuilder.createDefault(token)
                 .setActivity(Activity.listening(".help"))

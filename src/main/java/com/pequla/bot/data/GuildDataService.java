@@ -15,36 +15,36 @@ public class GuildDataService {
         this.repository = repository;
     }
 
-    public Optional<GuildData> getByGuildId(long guildId) {
-        return repository.getGuildDataByGuildId(guildId);
-    }
-
-    public GuildData createNew(long guildId) {
-        GuildData data = new GuildData();
-        data.setGuildId(guildId);
-        return repository.save(data);
-    }
-
     public void updateBotChannelId(long guildId, long channelId) {
-        GuildData data = generateGuildData(guildId);
+        GuildData data = retrieveGuildData(guildId);
         data.setBotChannelId(channelId);
         repository.save(data);
     }
 
     public void updateJoinLeaveChannelId(long guildId, long channelId) {
-        GuildData data = generateGuildData(guildId);
+        GuildData data = retrieveGuildData(guildId);
         data.setJoinLeaveChannelId(channelId);
         repository.save(data);
     }
 
     public void updateModeratorRoleId(long guildId, long roleId) {
-        GuildData data = generateGuildData(guildId);
+        GuildData data = retrieveGuildData(guildId);
         data.setModeratorRoleId(roleId);
         repository.save(data);
     }
 
-    public GuildData generateGuildData(long id) {
-        Optional<GuildData> optional = getByGuildId(id);
-        return optional.orElseGet(() -> createNew(id));
+    public GuildData retrieveGuildData(long guildId) {
+        Optional<GuildData> optional = repository.getGuildDataByGuildId(guildId);
+        if (optional.isEmpty()) {
+            GuildData data = new GuildData();
+            data.setGuildId(guildId);
+            return repository.save(data);
+        }
+        return optional.get();
+    }
+
+    public void deleteGuildData(long guildId) {
+        Optional<GuildData> optional = repository.getGuildDataByGuildId(guildId);
+        optional.ifPresent(repository::delete);
     }
 }

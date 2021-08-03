@@ -14,13 +14,13 @@ public class GuildData {
     @Column(name = "guild_id", nullable = false, unique = true)
     private long guildId;
 
-    @Column(name = "bot_channel_id", unique = true)
+    @Column(name = "bot_channel_id")
     private long botChannelId;
 
-    @Column(name = "moderator_role_id", unique = true)
+    @Column(name = "moderator_role_id")
     private long moderatorRoleId;
 
-    @Column(name = "join_leave_channel_id", unique = true)
+    @Column(name = "join_leave_channel_id")
     private long joinLeaveChannelId;
 
     public GuildData() {

@@ -32,7 +32,7 @@ public class InfoCommand extends GuildCommand {
     public void execute(GuildMessageReceivedEvent event, String[] args) {
         Guild guild = event.getGuild();
         Member self = guild.getSelfMember();
-        GuildData data = service.generateGuildData(guild.getIdLong());
+        GuildData data = service.retrieveGuildData(guild.getIdLong());
 
         String time = self.getTimeJoined().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         EmbedBuilder builder = AppUtils.createEmbed("Bot information")

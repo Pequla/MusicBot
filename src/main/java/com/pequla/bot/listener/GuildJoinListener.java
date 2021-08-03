@@ -20,14 +20,7 @@ public class GuildJoinListener extends DiscordListener {
 
     @Autowired
     public GuildJoinListener(DiscordBot bot, GuildDataService service) {
-        super(bot,service);
-    }
-
-    @Override
-    public void onGuildJoin(@NotNull GuildJoinEvent event) {
-        long id = event.getGuild().getIdLong();
-        GuildData data = service.generateGuildData(id);
-        logger.info("Joined guild " + id + " with internal id " + data.getId());
+        super(bot, service);
     }
 
     @Override
@@ -49,7 +42,7 @@ public class GuildJoinListener extends DiscordListener {
     }
 
     private void sendMessageWithEmbed(Guild guild, EmbedBuilder builder) {
-        GuildData data = service.generateGuildData(guild.getIdLong());
+        GuildData data = service.retrieveGuildData(guild.getIdLong());
         TextChannel channel = guild.getTextChannelById(data.getJoinLeaveChannelId());
         if (channel != null) {
             channel.sendMessageEmbeds(builder.build()).queue();

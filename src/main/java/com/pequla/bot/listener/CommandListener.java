@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Component
@@ -41,12 +40,12 @@ public class CommandListener extends DiscordListener {
                 .findAny()
                 .ifPresent(command -> {
                     Guild guild = event.getGuild();
-                    GuildData data = service.generateGuildData(guild.getIdLong());
+                    GuildData data = service.retrieveGuildData(guild.getIdLong());
                     Role moderator = guild.getRoleById(data.getModeratorRoleId());
                     TextChannel channel = guild.getTextChannelById(data.getBotChannelId());
-
+                    Member member = event.getMember();
                     // Member is moderator
-                    if (Objects.requireNonNull(event.getMember()).getRoles().contains(moderator)) {
+                    if (moderator != null && member != null && member.getRoles().contains(moderator)) {
                         command.execute(event, Arrays.copyOfRange(args, 1, args.length));
                         return;
                     }

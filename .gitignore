@@ -32,5 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### Token
+### Token and Logs
+*.gz
+logs/
 token.txt
+app.log
