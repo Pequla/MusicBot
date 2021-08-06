@@ -1,8 +1,6 @@
 package com.pequla.bot.listener;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.pequla.bot.AppUtils;
 import com.pequla.bot.DiscordBot;
 import com.pequla.bot.data.GuildDataService;
@@ -13,10 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -39,11 +33,8 @@ public class EmbedListener extends DiscordListener {
             return;
         }
         try {
-            URL url = new URL("https://api.instagram.com/oembed/?url=" + urls.get(0));
-            URLConnection request = url.openConnection();
-            request.connect();
-            JsonElement root = JsonParser.parseReader(new InputStreamReader((InputStream) request.getContent()));
-            JsonObject obj = root.getAsJsonObject();
+            JsonObject obj = AppUtils.getJsonElement("https://api.instagram.com/oembed/?url=" + urls.get(0))
+                    .getAsJsonObject();
             String title = obj.get("title").getAsString().replace("\n", "");
             if (title.length() > 150) {
                 title = title.substring(0, 150) + "...";

@@ -23,6 +23,9 @@ public class GuildData {
     @Column(name = "join_leave_channel_id")
     private long joinLeaveChannelId;
 
+    @Column(name = "dj_role_id")
+    private long djRoleId;
+
     public GuildData() {
     }
 
@@ -30,12 +33,14 @@ public class GuildData {
                      long guildId,
                      long botChannelId,
                      long moderatorRoleId,
-                     long joinLeaveChannelId) {
+                     long joinLeaveChannelId,
+                     long djRoleId) {
         this.id = id;
         this.guildId = guildId;
         this.botChannelId = botChannelId;
         this.moderatorRoleId = moderatorRoleId;
         this.joinLeaveChannelId = joinLeaveChannelId;
+        this.djRoleId = djRoleId;
     }
 
     public long getId() {
@@ -76,5 +81,13 @@ public class GuildData {
 
     public void setJoinLeaveChannelId(long joinLeaveChannelId) {
         this.joinLeaveChannelId = joinLeaveChannelId;
+    }
+
+    public long getDjRoleId() {
+        return djRoleId;
+    }
+
+    public void setDjRoleId(long djRoleId) {
+        this.djRoleId = djRoleId;
     }
 }
