@@ -15,16 +15,16 @@ public class GuildData {
     private long guildId;
 
     @Column(name = "bot_channel_id")
-    private long botChannelId;
+    private long botChannelId = 0;
 
     @Column(name = "moderator_role_id")
-    private long moderatorRoleId;
+    private long moderatorRoleId = 0;
 
     @Column(name = "join_leave_channel_id")
-    private long joinLeaveChannelId;
+    private long joinLeaveChannelId = 0;
 
     @Column(name = "dj_role_id")
-    private long djRoleId;
+    private long djRoleId = 0;
 
     public GuildData() {
     }
