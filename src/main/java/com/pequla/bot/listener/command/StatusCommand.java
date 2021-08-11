@@ -9,6 +9,7 @@ import com.pequla.server.ping.StatusResponse;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xbill.DNS.*;
@@ -29,7 +30,7 @@ public class StatusCommand extends GuildCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String @NotNull [] args) {
         TextChannel channel = event.getChannel();
         if (args.length == 1) {
             String query = "_minecraft._tcp." + args[0];

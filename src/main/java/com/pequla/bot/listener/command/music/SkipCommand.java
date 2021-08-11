@@ -4,6 +4,7 @@ import com.pequla.bot.AppUtils;
 import com.pequla.bot.listener.CommandListener;
 import com.pequla.bot.listener.command.music.utils.PlayerManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class SkipCommand extends MusicCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String[] args) {
         manager.getMusicManager(event.getGuild()).getScheduler().nextTrack();
         event.getChannel().sendMessageEmbeds(AppUtils.createEmbed("Track skipped")
                 .setDescription("Skipping the current track")

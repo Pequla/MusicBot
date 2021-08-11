@@ -53,7 +53,7 @@ public class EmbedListener extends DiscordListener {
     }
 
 
-    public static List<String> extractUrls(String text) {
+    public static @NotNull List<String> extractUrls(String text) {
         List<String> containedUrls = new ArrayList<>();
         String urlRegex = "((https?:\\/\\/(?:www\\.)?instagram\\.com\\/p\\/([^/?#&]+)).)";
         Pattern pattern = Pattern.compile(urlRegex, Pattern.CASE_INSENSITIVE);

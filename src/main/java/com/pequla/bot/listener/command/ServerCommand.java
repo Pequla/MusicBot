@@ -5,6 +5,7 @@ import com.pequla.bot.listener.CommandListener;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class ServerCommand extends GuildCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String @NotNull [] args) {
         TextChannel channel = event.getChannel();
         // Channel is from the same guild
         if (args.length == 0) {
@@ -49,7 +50,7 @@ public class ServerCommand extends GuildCommand {
         return Collections.singletonList(".server");
     }
 
-    private void send(TextChannel channel, Guild guild) {
+    private void send(TextChannel channel, @NotNull Guild guild) {
         guild.retrieveOwner().queue(owner -> channel.sendMessageEmbeds(AppUtils.createEmbed(guild.getName())
                 .addField("Members:", String.valueOf(guild.getMemberCount()), true)
                 .addField("Nitro Boosts:", String.valueOf(guild.getBoostCount()), true)

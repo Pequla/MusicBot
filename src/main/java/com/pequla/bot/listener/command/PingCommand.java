@@ -4,6 +4,7 @@ import com.pequla.bot.AppUtils;
 import com.pequla.bot.listener.CommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class PingCommand extends GuildCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String[] args) {
         JDA jda = event.getJDA();
         jda.getRestPing().queue(ping -> event.getChannel().sendMessageEmbeds(AppUtils.createEmbed("Discord response ping")
                 .setThumbnail("https://discord.com/assets/2c21aeda16de354ba5334551a883b481.png")

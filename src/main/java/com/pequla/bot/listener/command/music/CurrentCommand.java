@@ -5,6 +5,7 @@ import com.pequla.bot.listener.CommandListener;
 import com.pequla.bot.listener.command.music.utils.PlayerManager;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class CurrentCommand extends MusicCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String[] args) {
         AudioTrack track = manager.getMusicManager(event.getGuild()).getAudioPlayer().getPlayingTrack();
         AppUtils.sendTrackInfoEmbed(event.getChannel(), "Current track info", track);
     }

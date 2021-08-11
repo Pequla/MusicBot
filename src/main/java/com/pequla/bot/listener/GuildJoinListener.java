@@ -41,7 +41,7 @@ public class GuildJoinListener extends DiscordListener {
 
     }
 
-    private void sendMessageWithEmbed(Guild guild, EmbedBuilder builder) {
+    private void sendMessageWithEmbed(@NotNull Guild guild, EmbedBuilder builder) {
         GuildData data = service.retrieveGuildData(guild.getIdLong());
         TextChannel channel = guild.getTextChannelById(data.getJoinLeaveChannelId());
         if (channel != null) {

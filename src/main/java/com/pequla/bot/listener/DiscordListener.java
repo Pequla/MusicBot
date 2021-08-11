@@ -3,6 +3,7 @@ package com.pequla.bot.listener;
 import com.pequla.bot.DiscordBot;
 import com.pequla.bot.data.GuildDataService;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ public abstract class DiscordListener extends ListenerAdapter {
     protected GuildDataService service;
     protected Logger logger;
 
-    public DiscordListener(DiscordBot bot, GuildDataService service) {
+    public DiscordListener(@NotNull DiscordBot bot, GuildDataService service) {
         bot.registerListener(this);
         this.bot = bot;
         this.service = service;

@@ -4,6 +4,7 @@ import com.pequla.bot.listener.CommandListener;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class InviteCommand extends GuildCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String[] args) {
         String link = event.getJDA().getInviteUrl(Permission.ADMINISTRATOR);
         event.getChannel().sendMessage("You can invite me here:")
                 .setActionRow(Button.link(link, "Invite link")).queue();

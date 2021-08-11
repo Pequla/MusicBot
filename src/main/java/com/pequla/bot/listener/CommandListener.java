@@ -63,7 +63,7 @@ public class CommandListener extends DiscordListener {
                 });
     }
 
-    public synchronized void registerCommand(GuildCommand command) {
+    public synchronized void registerCommand(@NotNull GuildCommand command) {
         logger.info("Registering command " + command.getClass().getName());
         commands.add(command);
     }

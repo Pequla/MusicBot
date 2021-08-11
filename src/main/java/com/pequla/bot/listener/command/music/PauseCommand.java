@@ -1,10 +1,12 @@
 package com.pequla.bot.listener.command.music;
 
+import com.pequla.bot.AppUtils;
 import com.pequla.bot.listener.CommandListener;
 import com.pequla.bot.listener.command.music.utils.PlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,16 +22,20 @@ public class PauseCommand extends MusicCommand {
     }
 
     @Override
-    public void execute(GuildMessageReceivedEvent event, String[] args) {
+    public void execute(@NotNull GuildMessageReceivedEvent event, String[] args) {
         TextChannel channel = event.getChannel();
         AudioPlayer player = manager.getMusicManager(event.getGuild()).getAudioPlayer();
         if (player.isPaused()) {
             player.setPaused(false);
-            channel.sendMessage("Playback continued").queue();
+            channel.sendMessageEmbeds(AppUtils.createEmbed("Playback continued")
+                    .setDescription("Playback successfully continued")
+                    .build()).queue();
             return;
         }
         player.setPaused(true);
-        channel.sendMessage("Playback paused").queue();
+        channel.sendMessageEmbeds(AppUtils.createEmbed("Playback paused")
+                .setDescription("Playback successfully paused")
+                .build()).queue();
     }
 
     @Override
