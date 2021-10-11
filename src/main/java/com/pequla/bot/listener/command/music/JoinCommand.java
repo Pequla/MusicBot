@@ -37,7 +37,7 @@ public class JoinCommand extends MusicCommand {
             return;
         }
 
-        final GuildVoiceState memberState = event.getMember().getVoiceState();
+        final GuildVoiceState memberState = member.getVoiceState();
         if (memberState == null) {
             return;
         }
