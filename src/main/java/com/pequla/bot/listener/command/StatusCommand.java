@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xbill.DNS.*;
+import org.xbill.DNS.Record;
 
 import java.io.IOException;
 import java.net.InetAddress;
